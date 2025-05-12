@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Input Penjualan</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+<div class="container py-5">
+    <h2 class="mb-4">Input Penjualan</h2>
+    <form action="../../latihanbe/penjualan.php" method="POST" class="mb-3">
+        <div class="mb-3">
+            <label>Nama Barang <span class="text-danger">*</span></label>
+            <select name="barang" class="form-select" id="barangSelect" required></select>
+        </div>
+        <div class="mb-3">
+            <label>Jumlah <span class="text-danger">*</span></label>
+            <input type="number" name="jumlah" class="form-control" required min="1">
+        </div>
+        <div class="mb-3">
+            <label>Keterangan</label>
+            <input type="text" name="keterangan" class="form-control">
+        </div>
+        <button type="submit" onclick="submitForm(event)" class="btn btn-primary">Simpan</button>
+        <a href="menu.html" class="btn btn-secondary ms-2">⬅ Kembali ke Menu</a>
+    </form>
+</div>
+
+<script>
+// Fetch data barang dari stok API
+fetch("../../latihanbe/stok.php")
+.then(res => res.json())
+.then(data => {
+    const select = document.getElementById("barangSelect");
+    data.forEach(item => {
+        const option = document.createElement("option");
+        option.value = item.barang;
+        option.textContent = `${item.barang} (stok: ${item.jumlah})`;
+        select.appendChild(option);
+    });
+});
+
+function submitForm(e) {
+    e.preventDefault();
+    const form = e.target.form || e.target.closest("form");
+    const data = new FormData(form);
+
+    fetch(form.action, {
+        method: form.method,
+        body: data
+    })
+    .then(res => res.json())
+    .then(data => {
+        alert(data.message);
+        if (data.success) {
+            form.reset();
+        }
+    });
+}
+</script>
+</body>
+</html>
