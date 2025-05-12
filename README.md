@@ -65,7 +65,7 @@ Basic Requirement:
 Task:
 1. Create Blackbox testing (Usability Testing) scenario based on the application. (Test it, and save the screen shot proof of testing) - all of it save using excel
 2. Create Blackbox testing (User Acceptance Testing) scenario based on the application. (Test it, and save the screen shot proof of testing) - all of it save using excel
-3. Create API Testing: (Screen shot each API result and testing tab result)
+3. Create API Testing, Use Body Form-Data not JSON: (Screen shot each API result and testing tab result)
       - Create "Pembelian",
            - with jumlah must be numeric
            - with jumlah can not over 100
